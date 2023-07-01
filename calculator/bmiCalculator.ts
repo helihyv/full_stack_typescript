@@ -12,8 +12,8 @@ const parseArguments = (args: string[]): BmiValues => {
         if (Number(args[2]) > 0 && Number(args[3]) > 0) {
 
             return {
-                height: Number(args[3]),
-                weight: Number(args[4])
+                height: Number(args[2]),
+                weight: Number(args[3])
             } 
         } else {
             throw new Error('Provided arguments were not positive numbers!');
@@ -23,9 +23,10 @@ const parseArguments = (args: string[]): BmiValues => {
     }
 }
 
-const calculateBmi = (height: number, weight: number): string => {
+export const calculateBmi = (height: number, weight: number): string => {
 
-    const bmi = weight/((height/100)^2);
+
+    const bmi = weight/((height/100)**2);
 
     if (bmi < 18.5) {
 
@@ -39,6 +40,8 @@ const calculateBmi = (height: number, weight: number): string => {
     if (bmi < 30) {
         return "Overweight (unhealthy weight)";
     }
+
+
     
     return "Obese (unhealthy weight)";
 
