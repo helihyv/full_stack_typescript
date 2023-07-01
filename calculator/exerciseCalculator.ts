@@ -32,21 +32,21 @@ const parseExerciseArguments = (args: string[]): ExerciseValues => {
     return {
         target: Number(args[2]),
         dailyHours
-    }
+    };
 
 
-} 
+}; 
 const calculateExercise = (dailyHours: number[], target: number): ExerciseResult => {
 
-    let trainingDays: number = 0;
-    let totalHours: number = 0;
+    let trainingDays = 0;
+    let totalHours = 0;
 
     dailyHours.forEach((hours) => {
         if (hours > 0) {
             trainingDays += 1;
             totalHours += hours;
         }
-    }) 
+    }); 
     const periodLength: number = dailyHours.length;
     const average: number = totalHours/periodLength;
 
@@ -77,9 +77,9 @@ const calculateExercise = (dailyHours: number[], target: number): ExerciseResult
         ratingDescription,
         target,
         average
-    }
+    };
 
-} 
+}; 
 
 try {
     const {target, dailyHours} = parseExerciseArguments(process.argv);

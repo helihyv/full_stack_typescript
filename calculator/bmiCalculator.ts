@@ -14,14 +14,14 @@ const parseArguments = (args: string[]): BmiValues => {
             return {
                 height: Number(args[2]),
                 weight: Number(args[3])
-            } 
+            };
         } else {
             throw new Error('Provided arguments were not positive numbers!');
         }
     } else {
         throw new Error('Provided arguments were not numbers!');
     }
-}
+};
 
 export const calculateBmi = (height: number, weight: number): string => {
 
@@ -45,13 +45,13 @@ export const calculateBmi = (height: number, weight: number): string => {
     
     return "Obese (unhealthy weight)";
 
-}
+};
 
 try {
     const {height, weight} = parseArguments(process.argv);
     console.log(calculateBmi(height,weight));
 } catch (error: unknown) {
-    let errorMessage = 'An error occurred. '
+    let errorMessage = 'An error occurred. ';
     if (error instanceof Error) {
         errorMessage += 'Error: ' + error.message;
     }
