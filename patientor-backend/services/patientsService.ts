@@ -15,7 +15,6 @@ export const getPatientsWithoutSsn = () : PatientWithoutSsn[] => {
 
 export const addPatient = (patient : NewPatient) : Patient => {
 
-    console.log(patient);
     const id = uuid();
 
     const newPatient : Patient = {
