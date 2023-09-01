@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { DiaryEntry, NewDiaryEntry } from "./types";
 import { createDiaryEntry, getAllDiaryEntries } from "./services/diaryService"
+import axios from "axios";
 
 
 
@@ -10,6 +11,7 @@ const App = () => {
   const [visibility,setVisibility] = useState("");
   const [weather,setWeather] = useState("");
   const [comment,setComment] = useState("");
+  const [errorMessage,setErrorMessage] = useState<string|undefined>();
 
   useEffect(() => {
     getAllDiaryEntries().then(data => setDiaryEntries(data));
@@ -18,16 +20,30 @@ const App = () => {
   const diaryEntryCreation = (event : React.SyntheticEvent) => {
     event.preventDefault();
   
-    createDiaryEntry({date, visibility,weather,comment}).then(data => {
-      setDiaryEntries(diaryEntries.concat(data))
-    })
+ 
+    createDiaryEntry({date, visibility,weather,comment})
+      .then(data => {
+        setDiaryEntries(diaryEntries.concat(data));
+        setVisibility("");
+        setWeather("");
+        setDate("");
+        setComment("");
+        setErrorMessage("");
+      })
+      .catch (error => {
+          if (axios.isAxiosError(error)) 
+            if (error.response)
+              {setErrorMessage(error.response.data)}
+
+          })
+      
   }
 
 
   return (
 <div>
    <h1>Add new entry</h1>
-
+    <span style={{color: "red"}}>{errorMessage}</span>
     <form onSubmit={diaryEntryCreation}>
       Date  <input 
         value ={date}
