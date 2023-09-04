@@ -10,14 +10,14 @@ export enum Visibility {
     Great = 'great',
     Good = 'good',
     Ok = 'ok',
-    Poor = 'Poor'
+    Poor = 'poor'
 }
 
 export interface DiaryEntry {
     id: number;
     date: string;
-    weather: string;
-    visibility: string;
+    weather: Weather;
+    visibility: Visibility;
     comment?: string;
 }
 
